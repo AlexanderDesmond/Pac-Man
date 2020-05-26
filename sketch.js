@@ -9,9 +9,12 @@ function setup() {
 
   for (let i = 0; i < 400; i++) {
     // Testing
+    /*
     field.push(new Tile(i % 20, Math.floor(i / 20), "BARRIER"));
     field.push(new Tile(i % 20, Math.floor(i / 20), "BISCUIT"));
     field.push(new Tile(i % 20, Math.floor(i / 20), "CHERRY"));
+    */
+    field.push(new Tile(i % 20, Math.floor(i / 20), random(TYPES)));
   }
 }
 
