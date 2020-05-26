@@ -1,11 +1,40 @@
 const SIZE = 25;
 const DIMENSIONS = 20;
 
-const field = [];
+const FIELD_MAP = [
+  "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+  "0,1,1,1,1,1,1,3,1,1,1,1,1,1,1,1,1,1,1,0",
+  "0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,3,0,0,0",
+  "0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0",
+  "0,1,1,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0",
+  "0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0",
+  "0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0",
+  "0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0",
+  "0,0,0,0,0,0,1,1,0,0,1,0,0,1,1,0,0,0,0,0",
+  "0,1,1,1,1,1,1,1,0,4,1,4,0,1,1,1,1,3,1,0",
+  "0,1,1,1,1,3,1,1,0,4,1,4,0,1,1,1,1,1,1,0",
+  "0,0,0,0,0,0,1,1,0,1,0,0,0,1,1,0,0,0,0,0",
+  "0,1,1,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0",
+  "0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0",
+  "0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0",
+  "0,1,1,1,1,1,1,1,1,1,5,1,1,1,1,1,1,1,1,0",
+  "0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0",
+  "0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0",
+  "0,1,1,1,1,3,1,1,1,1,1,1,1,1,1,1,1,3,1,0",
+  "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+];
+let field = [];
+let fieldMap;
+
+function preload() {
+  fieldMap = loadStrings("field.txt");
+}
 
 function setup() {
   // Create canvas/
   createCanvas(500, 500);
+
+  field = generateField();
 
   for (let i = 0; i < 400; i++) {
     // Testing
@@ -14,7 +43,7 @@ function setup() {
     field.push(new Tile(i % 20, Math.floor(i / 20), "BISCUIT"));
     field.push(new Tile(i % 20, Math.floor(i / 20), "CHERRY"));
     */
-    field.push(new Tile(i % 20, Math.floor(i / 20), random(TYPES)));
+    //field.push(new Tile(i % 20, Math.floor(i / 20), random(TYPES)));
   }
 }
 
@@ -26,4 +55,20 @@ function draw() {
   for (let i = 0; i < field.length; i++) {
     field[i].draw();
   }
+
+  text(fieldMap, width / 2, 50);
+}
+
+function generateField() {
+  let f = [];
+
+  for (let i = 0; i < FIELD_MAP.length; i++) {
+    let row = FIELD_MAP[i].split(",");
+    for (let j = 0; j < row.length; j++) {
+      let type = TYPES[row[j]];
+      let tile = new Tile(j, i, type, -1);
+    }
+  }
+
+  return f;
 }

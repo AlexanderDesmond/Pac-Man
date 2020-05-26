@@ -22,8 +22,7 @@ class Tile {
         fill("#0000FF");
         rect(this.x * SIZE, this.y * SIZE, SIZE, SIZE);
         break;
-      case "OPEN":
-        break;
+
       case "BISCUIT":
         noStroke();
         fill("#FFFF00");
@@ -35,6 +34,7 @@ class Tile {
         );
         ellipseMode(CORNER);
         break;
+
       case "CHERRY":
         noStroke();
         fill("#FF0000");
@@ -53,3 +53,18 @@ class Tile {
     }
   }
 }
+
+/*
+function parseType(t) {
+  switch (t) {
+    case "0":
+      return "BARRIER";
+    case "1":
+      return "OPEN";
+    case "2":
+      return "BISCUIT";
+    case "3":
+      return "CHERRY";
+  }
+}
+*/
