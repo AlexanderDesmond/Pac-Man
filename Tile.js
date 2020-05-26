@@ -1,5 +1,5 @@
 // Types of Tiles
-const TYPES = ["BARRIER", "OPEN", "BISCUIT", "CHERRY", "GHOST", "PACMAN"];
+const TYPES = ["BARRIER", "BISCUIT", "OPEN", "CHERRY", "GHOST", "PACMAN"];
 
 const HALF_SIZE = SIZE / 2;
 const THIRD_SIZE = SIZE / 3;
