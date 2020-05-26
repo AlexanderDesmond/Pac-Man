@@ -24,11 +24,6 @@ const FIELD_MAP = [
   "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
 ];
 let field = [];
-let fieldMap;
-
-function preload() {
-  fieldMap = loadStrings("field.txt");
-}
 
 function setup() {
   // Create canvas/
@@ -55,8 +50,6 @@ function draw() {
   for (let i = 0; i < field.length; i++) {
     field[i].draw();
   }
-
-  text(fieldMap, width / 2, 50);
 }
 
 function generateField() {
@@ -64,9 +57,12 @@ function generateField() {
 
   for (let i = 0; i < FIELD_MAP.length; i++) {
     let row = FIELD_MAP[i].split(",");
+
     for (let j = 0; j < row.length; j++) {
       let type = TYPES[row[j]];
+      console.log(type);
       let tile = new Tile(j, i, type, -1);
+      f.push(tile);
     }
   }
 
