@@ -1,7 +1,9 @@
 // Types of Tiles
 const TYPES = ["BARRIER", "OPEN", "BISCUIT", "CHERRY", "GHOST", "PACMAN"];
 
+const HALF_SIZE = SIZE / 2;
 const THIRD_SIZE = SIZE / 3;
+const QUARTER_SIZE = SIZE / 4;
 
 // Class for Tile
 class Tile {
@@ -15,8 +17,8 @@ class Tile {
   draw() {
     switch (this.type) {
       case "BARRIER":
-        strokeWeight(5);
         stroke(0);
+        strokeWeight(5);
         fill("#0000FF");
         rect(this.x * SIZE, this.y * SIZE, SIZE, SIZE);
         break;
@@ -34,6 +36,16 @@ class Tile {
         ellipseMode(CORNER);
         break;
       case "CHERRY":
+        stroke(255);
+        strokeWeight(2);
+        fill("#FF2222");
+        ellipse(
+          this.x * SIZE + QUARTER_SIZE,
+          this.y * SIZE + QUARTER_SIZE,
+          HALF_SIZE,
+          HALF_SIZE
+        );
+        ellipseMode(CORNER);
         break;
       case "GHOST":
         break;

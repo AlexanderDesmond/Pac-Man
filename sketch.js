@@ -8,9 +8,10 @@ function setup() {
   createCanvas(500, 500);
 
   for (let i = 0; i < 400; i++) {
+    // Testing
     field.push(new Tile(i % 20, Math.floor(i / 20), "BARRIER"));
-
     field.push(new Tile(i % 20, Math.floor(i / 20), "BISCUIT"));
+    field.push(new Tile(i % 20, Math.floor(i / 20), "CHERRY"));
   }
 }
 
