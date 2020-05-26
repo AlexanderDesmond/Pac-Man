@@ -26,7 +26,7 @@ class Tile {
         break;
       case "BISCUIT":
         noStroke();
-        fill(255);
+        fill("#FFFF00");
         ellipse(
           this.x * SIZE + THIRD_SIZE,
           this.y * SIZE + THIRD_SIZE,
@@ -36,9 +36,8 @@ class Tile {
         ellipseMode(CORNER);
         break;
       case "CHERRY":
-        stroke(255);
-        strokeWeight(2);
-        fill("#FF2222");
+        noStroke();
+        fill("#FF0000");
         ellipse(
           this.x * SIZE + QUARTER_SIZE,
           this.y * SIZE + QUARTER_SIZE,
