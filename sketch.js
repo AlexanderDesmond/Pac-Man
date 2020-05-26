@@ -9,6 +9,8 @@ function setup() {
 
   for (let i = 0; i < 400; i++) {
     field.push(new Tile(i % 20, Math.floor(i / 20), "BARRIER"));
+
+    field.push(new Tile(i % 20, Math.floor(i / 20), "BISCUIT"));
   }
 }
 
