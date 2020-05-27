@@ -25,7 +25,7 @@ const FIELD_MAP = [
 ];
 let field = [];
 
-let pacX, pacY;
+let pacman;
 
 function setup() {
   // Create canvas/
@@ -50,8 +50,12 @@ function draw() {
 
   // Draw tiles
   for (let i = 0; i < field.length; i++) {
+    field[i].update();
     field[i].draw();
   }
+
+  // Move Pac-Man
+  handleMovement();
 }
 
 function generateField() {
@@ -63,6 +67,11 @@ function generateField() {
     for (let j = 0; j < row.length; j++) {
       let type = TYPES[row[j]];
       let tile = new Tile(j, i, type, -1);
+
+      if (type === "PACMAN") {
+        pacman = tile;
+      }
+
       f.push(tile);
     }
   }
@@ -70,10 +79,15 @@ function generateField() {
   return f;
 }
 
+// Handle Pac-Man's movement.
 function handleMovement() {
   if (keyIsDown(UP_ARROW)) {
+    pacman.move(0, -1, true);
   } else if (keyIsDown(DOWN_ARROW)) {
+    pacman.move(0, 1, true);
   } else if (keyIsDown(LEFT_ARROW)) {
+    pacman.move(-1, 0, true);
   } else if (keyIsDown(RIGHT_ARROW)) {
+    pacman.move(1, 0, true);
   }
 }
