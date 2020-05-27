@@ -48,6 +48,17 @@ class Tile {
         break;
 
       case "GHOST":
+        stroke(0);
+        strokeWeight(1);
+        fill("#FF00EE");
+        beginShape();
+        vertex(this.x * SIZE + HALF_SIZE, this.y * SIZE + QUARTER_SIZE);
+        vertex(this.x * SIZE + QUARTER_SIZE, this.y * SIZE + QUARTER_SIZE * 3);
+        vertex(
+          this.x * SIZE + QUARTER_SIZE * 3,
+          this.y * SIZE + QUARTER_SIZE * 3
+        );
+        endShape(CLOSE);
         break;
 
       case "PACMAN":
