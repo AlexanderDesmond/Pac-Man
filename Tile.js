@@ -25,7 +25,7 @@ class Tile {
 
       case "BISCUIT":
         noStroke();
-        fill("#FFFF00");
+        fill(255);
         ellipse(
           this.x * SIZE + THIRD_SIZE,
           this.y * SIZE + THIRD_SIZE,
@@ -46,9 +46,21 @@ class Tile {
         );
         ellipseMode(CORNER);
         break;
+
       case "GHOST":
         break;
+
       case "PACMAN":
+        stroke("#FFFF00");
+        strokeWeight(5);
+        fill("#FFFF33");
+        ellipse(
+          this.x * SIZE + QUARTER_SIZE,
+          this.y * SIZE + QUARTER_SIZE,
+          HALF_SIZE,
+          HALF_SIZE
+        );
+        ellipseMode(CORNER);
         break;
     }
   }
