@@ -80,7 +80,7 @@ class Tile {
   }
 
   update() {
-    /* Handle Movement */
+    // Handle Movement
     if (this.moving) {
       // Linear interpolation between current location and destination vectors.
       this.x = lerp(this.x, this.destination.x, this.speed);
