@@ -12,6 +12,9 @@ class Tile {
     this.y = y;
 
     this.type = type;
+    this.moving = false;
+    this.destination = (-1, -1);
+    this.speed = 0.2;
   }
 
   draw() {
@@ -75,19 +78,65 @@ class Tile {
         break;
     }
   }
-}
 
-/*
-function parseType(t) {
-  switch (t) {
-    case "0":
-      return "BARRIER";
-    case "1":
-      return "OPEN";
-    case "2":
-      return "BISCUIT";
-    case "3":
-      return "CHERRY";
+  update() {
+    /* Handle Movement */
+    if (this.moving) {
+      // Linear interpolation between current location and destination vectors.
+      this.x = lerp(this.x, this.destination.x, this.speed);
+      this.y = lerp(this.y, this.destination.y, this.speed);
+
+      // Calculate the distance.
+      let distanceX = Math.abs(this.x - this.destination.x);
+      let distanceY = Math.abs(this.y - this.destination.y);
+
+      // Check if the distance has been covered.
+      if (distanceX < 0.1 && distanceY < 0.1) {
+        this.x = this.destination.x;
+        this.y = this.destination.y;
+
+        // Destination reached, no longer moving.
+        this.moving = false;
+      }
+    }
+  }
+
+  move(x, y, relative) {
+    // x and y coordinates of destination tile.
+    let destinationX, destinationY;
+
+    if (relative) {
+      destinationX = this.x + x;
+      destinationY = this.y + y;
+    } else {
+      destinationX = x;
+      destinationY = y;
+    }
+
+    // If already moving, it cannot move again until next ypdate.
+    if (this.moving) return false;
+
+    // Get the destination tile.
+    let destinationTile = getTile(destinationX, destinationY);
+    let type = destinationTile.type;
+
+    // Prevents Pac-Man and Ghosts from colliding into barriers and Ghosts colliding into each other.
+    if (
+      (type === "BARRIER" && this.type !== "BARRIER") ||
+      (type === "GHOST" && this.type === "GHOST")
+    ) {
+      return false;
+    }
+
+    // Begin movement next update.
+    this.moving = true;
+    this.destination = createVector(destinationX, destinationY);
+
+    return true;
   }
 }
-*/
+
+// Get a specific tile from its x and y coordinates.
+function getTile(x, y) {
+  return field[y * DIMENSIONS + x];
+}

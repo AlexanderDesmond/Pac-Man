@@ -25,6 +25,8 @@ const FIELD_MAP = [
 ];
 let field = [];
 
+let pacX, pacY;
+
 function setup() {
   // Create canvas/
   createCanvas(500, 500);
@@ -60,11 +62,18 @@ function generateField() {
 
     for (let j = 0; j < row.length; j++) {
       let type = TYPES[row[j]];
-      console.log(type);
       let tile = new Tile(j, i, type, -1);
       f.push(tile);
     }
   }
 
   return f;
+}
+
+function handleMovement() {
+  if (keyIsDown(UP_ARROW)) {
+  } else if (keyIsDown(DOWN_ARROW)) {
+  } else if (keyIsDown(LEFT_ARROW)) {
+  } else if (keyIsDown(RIGHT_ARROW)) {
+  }
 }
