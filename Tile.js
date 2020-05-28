@@ -122,6 +122,10 @@ class Tile {
             score += 10;
             destinationTile.exists = false;
             break;
+
+          case "GHOST":
+            endGame(false);
+            break;
         }
       }
     }

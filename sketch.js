@@ -99,3 +99,24 @@ function handleMovement() {
     pacman.move(1, 0, true);
   }
 }
+
+function endGame(gameWon) {
+  stroke(0);
+  strokeWeight(5);
+  fill(255);
+  textAlign(CENTER);
+  textSize(75);
+
+  // Display end game text
+  if (gameWon) {
+    text("YOU WIN!", width / 2, height / 2);
+  } else {
+    text("GAME OVER!", width / 2, height / 2);
+  }
+
+  // Instructions to start a new game.
+  textSize(35);
+  text("Pres SPACE to restart.", width / 2, height / 2 + 50);
+
+  noLoop();
+}
