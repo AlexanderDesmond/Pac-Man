@@ -13,6 +13,7 @@ class Tile {
 
     this.type = type;
     this.moving = false;
+    this.intact = true;
     this.destination = (-1, -1);
     this.speed = 0.2;
   }
@@ -80,7 +81,10 @@ class Tile {
   }
 
   update() {
-    // Handle Movement
+    // If this tile does not exist, there is nothing to do.
+    if (!this.intact) return;
+
+    /* Handle Movement */
     if (this.moving) {
       // Linear interpolation between current location and destination vectors.
       this.x = lerp(this.x, this.destination.x, this.speed);
@@ -97,6 +101,28 @@ class Tile {
 
         // Destination reached, no longer moving.
         this.moving = false;
+      }
+    }
+
+    /* Handle eating */
+    // Only Pac-Man can eat biscuits and cherries.
+    if (this.type === "PACMAN") {
+      // Pac-Man's destination tile
+      let destinationTile = getTile(Math.floor(this.x), Math.floor(this.y));
+
+      // Ensure the destination tile exists.
+      if (destinationTile.intact) {
+        // When Pac-Man eats a biscuit or cherry, increase the score and have the food be 'eaten'.
+        switch (destinationTile.type) {
+          case "BISCUIT":
+            score++;
+            destinationTile.intact = false;
+            break;
+          case "CHERRY":
+            score += 10;
+            destinationTile.intact = false;
+            break;
+        }
       }
     }
   }
