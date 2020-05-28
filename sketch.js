@@ -34,16 +34,6 @@ function setup() {
   createCanvas(500, 540);
 
   field = generateField();
-
-  for (let i = 0; i < 400; i++) {
-    // Testing
-    /*
-    field.push(new Tile(i % 20, Math.floor(i / 20), "BARRIER"));
-    field.push(new Tile(i % 20, Math.floor(i / 20), "BISCUIT"));
-    field.push(new Tile(i % 20, Math.floor(i / 20), "CHERRY"));
-    */
-    //field.push(new Tile(i % 20, Math.floor(i / 20), random(TYPES)));
-  }
 }
 
 function draw() {
@@ -52,7 +42,11 @@ function draw() {
 
   // Draw tiles
   for (let i = 0; i < field.length; i++) {
-    if (field[i].exists) {
+    if (
+      field[i].exists &&
+      field[i].type !== "PACMAN" &&
+      field[i].type !== "GHOST"
+    ) {
       field[i].draw();
     }
   }
@@ -80,7 +74,6 @@ function draw() {
 
 function generateField() {
   let f = [];
-  //let ghostId = 0;
 
   for (let i = 0; i < FIELD_MAP.length; i++) {
     let row = FIELD_MAP[i].split(",");
@@ -110,8 +103,6 @@ function generateField() {
           f.push(tile);
           break;
       }
-
-      f.push(tile);
     }
   }
 
