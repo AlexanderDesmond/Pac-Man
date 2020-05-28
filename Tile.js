@@ -13,7 +13,7 @@ class Tile {
 
     this.type = type;
     this.moving = false;
-    this.intact = true;
+    this.exists = true;
     this.destination = (-1, -1);
     this.speed = 0.2;
   }
@@ -82,7 +82,7 @@ class Tile {
 
   update() {
     // If this tile does not exist, there is nothing to do.
-    if (!this.intact) return;
+    if (!this.exists) return;
 
     /* Handle Movement */
     if (this.moving) {
@@ -111,16 +111,16 @@ class Tile {
       let destinationTile = getTile(Math.floor(this.x), Math.floor(this.y));
 
       // Ensure the destination tile exists.
-      if (destinationTile.intact) {
+      if (destinationTile.exists) {
         // When Pac-Man eats a biscuit or cherry, increase the score and have the food be 'eaten'.
         switch (destinationTile.type) {
           case "BISCUIT":
             score++;
-            destinationTile.intact = false;
+            destinationTile.exists = false;
             break;
           case "CHERRY":
             score += 10;
-            destinationTile.intact = false;
+            destinationTile.exists = false;
             break;
         }
       }
