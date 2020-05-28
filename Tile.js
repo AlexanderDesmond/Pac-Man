@@ -128,6 +128,20 @@ class Tile {
             break;
         }
       }
+    } else if (this.type === "GHOST") {
+      /* Ghost AI */
+
+      // If a Ghost catches Pac-Man the game is lost.
+      let distance = dist(pacman.x, pacman.y, this.x, this.y);
+      if (distance < 0.3) {
+        endGame(false);
+      }
+
+      // If already moving, it cannot move again until next update.
+      if (this.moving) return false;
+
+      // List of possible moves.
+      let possibleMoves = [];
     }
   }
 
@@ -143,7 +157,7 @@ class Tile {
       destinationY = y;
     }
 
-    // If already moving, it cannot move again until next ypdate.
+    // If already moving, it cannot move again until next update.
     if (this.moving) return false;
 
     // Get the destination tile.
