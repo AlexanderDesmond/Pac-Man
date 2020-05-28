@@ -52,7 +52,6 @@ function draw() {
   // Draw tiles
   for (let i = 0; i < field.length; i++) {
     if (field[i].exists) {
-      field[i].update();
       field[i].draw();
     }
   }
