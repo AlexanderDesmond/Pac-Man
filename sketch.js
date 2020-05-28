@@ -23,13 +23,13 @@ const FIELD_MAP = [
   "0,1,1,1,1,3,1,1,1,1,1,1,1,1,1,1,1,3,1,0",
   "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
 ];
-let field = [];
-
-let pacman;
+let field = [],
+  pacman,
+  score = 0;
 
 function setup() {
   // Create canvas/
-  createCanvas(500, 500);
+  createCanvas(500, 540);
 
   field = generateField();
 
@@ -53,6 +53,12 @@ function draw() {
     field[i].update();
     field[i].draw();
   }
+
+  // Draw score
+  noStroke();
+  fill(255);
+  text(score, 5, height - 10);
+  textSize(30);
 
   // Move Pac-Man
   handleMovement();
