@@ -50,8 +50,10 @@ function draw() {
 
   // Draw tiles
   for (let i = 0; i < field.length; i++) {
-    field[i].update();
-    field[i].draw();
+    if (field[i].intact) {
+      field[i].update();
+      field[i].draw();
+    }
   }
 
   // Draw score
