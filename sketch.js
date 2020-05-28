@@ -25,6 +25,7 @@ const FIELD_MAP = [
 ];
 let field = [],
   pacman,
+  ghosts = [],
   score = 0;
 
 function setup() {
@@ -56,10 +57,21 @@ function draw() {
     }
   }
 
+  // Draw Pac-Man
+  pacman.update();
+  pacman.draw();
+
+  // Draw ghosts
+  for (let i = 0; i < ghosts.length; i++) {
+    ghosts[i].update();
+    ghosts[i].draw();
+  }
+
   // Draw score
   noStroke();
   fill(255);
-  text(score, 5, height - 10);
+  text(score, 10, height - 10);
+  textAlign(LEFT);
   textSize(30);
 
   // Move Pac-Man
@@ -68,6 +80,7 @@ function draw() {
 
 function generateField() {
   let f = [];
+  //let ghostId = 0;
 
   for (let i = 0; i < FIELD_MAP.length; i++) {
     let row = FIELD_MAP[i].split(",");
@@ -78,6 +91,8 @@ function generateField() {
 
       if (type === "PACMAN") {
         pacman = tile;
+      } else if (type === "GHOST") {
+        ghosts.push(tile);
       }
 
       f.push(tile);

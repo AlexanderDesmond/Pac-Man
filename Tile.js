@@ -15,7 +15,7 @@ class Tile {
     this.moving = false;
     this.exists = true;
     this.destination = (-1, -1);
-    this.speed = 0.2;
+    this.speed = 0.1;
   }
 
   draw() {
