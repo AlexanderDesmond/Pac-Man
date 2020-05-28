@@ -26,7 +26,8 @@ const FIELD_MAP = [
 let field = [],
   pacman,
   ghosts = [],
-  score = 0;
+  score = 0,
+  finalScore;
 
 function setup() {
   // Create canvas/
@@ -88,10 +89,26 @@ function generateField() {
       let type = TYPES[row[j]];
       let tile = new Tile(j, i, type, -1);
 
-      if (type === "PACMAN") {
-        pacman = tile;
-      } else if (type === "GHOST") {
-        ghosts.push(tile);
+      switch (type) {
+        case "PACMAN":
+          pacman = tile;
+          f.push(new Tile(j, i, "OPEN"));
+          break;
+        case "GHOST":
+          ghosts.push(new Tile(j, i, type));
+          f.push(new Tile(j, i, "OPEN"));
+          break;
+        case "BISCUIT":
+          finalScore++;
+          f.push(tile);
+          break;
+        case "CHERRY":
+          finalScore += 10;
+          f.push(tile);
+          break;
+        case "BARRIER":
+          f.push(tile);
+          break;
       }
 
       f.push(tile);

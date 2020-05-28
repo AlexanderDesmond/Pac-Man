@@ -128,6 +128,11 @@ class Tile {
             break;
         }
       }
+
+      // Check if game has been won.
+      if (score === finalScore) {
+        endGame(true);
+      }
     } else if (this.type === "GHOST") {
       /* Ghost AI */
 
