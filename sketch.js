@@ -69,8 +69,8 @@ function draw() {
   // Draw score
   noStroke();
   fill(255);
-  text(score, 10, height - 10);
-  textAlign(LEFT);
+  text(score, 30, height - 10);
+  textAlign(CENTER);
   textSize(30);
 
   // Move Pac-Man
