@@ -155,6 +155,27 @@ class Tile {
         getTile(this.x - 1, this.y),
         getTile(this.x + 1, this.y),
       ];
+
+      // Sort possibleMoves in order of most optimal moves (moves closest to Pac-Man).
+      possibleMoves.sort((a, b) => {
+        let aDist = dist(a.x, a.y, pacman.x, pacman.y);
+        let bDist = dist(b.x, b.y, pacman.x, pacman.y);
+
+        return aDist - bDist;
+      });
+
+      // Make move
+      if (this.behaviour === 0) {
+        // If Ghost is 'aggressive', move towards Pac-Man.
+        for (let i = 0; i < possibleMoves.length; i++) {
+          // Attempt to move towards Pac-Man.
+          if (this.move(possibleMoves[i].x, possibleMoves[i].y, false)) break;
+        }
+      } else {
+        // Otherwise, take any possible move.
+        let i = Math.floor(random(4));
+        this.move(possibleMoves[i].x, possibleMoves[i].y, false);
+      }
     }
   }
 
