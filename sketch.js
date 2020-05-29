@@ -142,7 +142,7 @@ function endGame(gameWon) {
 
   // Instructions to start a new game.
   textSize(35);
-  text("Pres SPACE to restart.", width / 2, height / 2 + 50);
+  text("Pres F5 to restart.", width / 2, height / 2 + 50);
 
   noLoop();
 }
