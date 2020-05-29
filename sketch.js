@@ -27,7 +27,7 @@ let field = [],
   pacman,
   ghosts = [],
   score = 0,
-  finalScore;
+  finalScore = 0;
 
 function setup() {
   // Create canvas/
@@ -75,6 +75,8 @@ function draw() {
 function generateField() {
   let f = [];
 
+  let ghostId = 0;
+
   for (let i = 0; i < FIELD_MAP.length; i++) {
     let row = FIELD_MAP[i].split(",");
 
@@ -88,8 +90,10 @@ function generateField() {
           f.push(new Tile(j, i, "OPEN"));
           break;
         case "GHOST":
-          ghosts.push(new Tile(j, i, type));
+          let behaviour = ghostId % 2;
+          ghosts.push(new Tile(j, i, type, behaviour));
           f.push(new Tile(j, i, "OPEN"));
+          ghostId++;
           break;
         case "BISCUIT":
           finalScore++;

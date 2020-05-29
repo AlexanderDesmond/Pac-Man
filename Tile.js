@@ -7,7 +7,7 @@ const QUARTER_SIZE = SIZE / 4;
 
 // Class for Tile
 class Tile {
-  constructor(x, y, type) {
+  constructor(x, y, type, behaviour) {
     this.x = x;
     this.y = y;
 
@@ -16,6 +16,8 @@ class Tile {
     this.exists = true;
     this.destination = (-1, -1);
     this.speed = 0.2;
+
+    this.behaviour = behaviour;
   }
 
   draw() {
@@ -146,7 +148,13 @@ class Tile {
       if (this.moving) return false;
 
       // List of possible moves.
-      let possibleMoves = [];
+      // UP, DOWN. LEFT, RIGHT
+      let possibleMoves = [
+        getTile(this.x, this.y - 1),
+        getTile(this.x, this.y + 1),
+        getTile(this.x - 1, this.y),
+        getTile(this.x + 1, this.y),
+      ];
     }
   }
 
