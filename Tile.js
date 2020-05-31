@@ -183,6 +183,7 @@ class Tile {
     // x and y coordinates of destination tile.
     let destinationX, destinationY;
 
+    // Pac-Man direction is relative, Ghost direction is not.
     if (relative) {
       destinationX = this.x + x;
       destinationY = this.y + y;
