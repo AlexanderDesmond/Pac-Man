@@ -132,10 +132,7 @@ class Tile {
             destinationTile.exists = false;
             //
             pacman.cherryEaten = true;
-            window.setTimeout(() => {
-              pacman.cherryEaten = false;
-              console.log("Cherry Eaten: ", pacman.cherryEaten);
-            }, 1000);
+            window.setTimeout(() => (pacman.cherryEaten = false), 10000);
             break;
 
           case "GHOST":
