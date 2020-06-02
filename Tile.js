@@ -178,16 +178,26 @@ class Tile {
       });
 
       // Make move
-      if (this.behaviour === 0) {
-        // If Ghost is 'aggressive', move towards Pac-Man.
-        for (let i = 0; i < possibleMoves.length; i++) {
-          // Attempt to move towards Pac-Man.
-          if (this.move(possibleMoves[i].x, possibleMoves[i].y, false)) break;
+      if (!pacman.cherryEaten) {
+        if (this.behaviour === 0) {
+          // If Ghost is 'aggressive', move towards Pac-Man.
+          for (let i = 0; i < possibleMoves.length; i++) {
+            // Attempt to move towards Pac-Man.
+            if (this.move(possibleMoves[i].x, possibleMoves[i].y, false)) break;
+          }
+        } else {
+          // Otherwise, take any possible move.
+          let i = Math.floor(random(4));
+          this.move(possibleMoves[i].x, possibleMoves[i].y, false);
         }
       } else {
-        // Otherwise, take any possible move.
-        let i = Math.floor(random(4));
-        this.move(possibleMoves[i].x, possibleMoves[i].y, false);
+        // If Pac-Man recently ate a cherry, the Ghosts are scared and run away.
+        let movesReversed = possibleMoves.slice().reverse();
+
+        for (let i = 0; i < movesReversed.length; i++) {
+          // Attempt to move away Pac-Man.
+          if (this.move(movesReversed[i].x, movesReversed[i].y, false)) break;
+        }
       }
     }
   }
