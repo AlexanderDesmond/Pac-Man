@@ -56,7 +56,7 @@ class Tile {
       case "GHOST":
         stroke(0);
         strokeWeight(1);
-        fill("#FF00EE");
+        this.behaviour === 0 ? fill("purple") : fill("pink");
         beginShape();
         vertex(this.x * SIZE + HALF_SIZE, this.y * SIZE + QUARTER_SIZE);
         vertex(this.x * SIZE + QUARTER_SIZE, this.y * SIZE + QUARTER_SIZE * 3);
