@@ -57,7 +57,13 @@ class Tile {
       case "GHOST":
         stroke(0);
         strokeWeight(1);
-        this.behaviour === 0 ? fill("purple") : fill("pink");
+        pacman.cherryEaten === true
+          ? fill("blue")
+          : this.behaviour === 0
+          ? fill("purple")
+          : this.behaviour === 1
+          ? fill("pink")
+          : fill("black");
         beginShape();
         vertex(this.x * SIZE + HALF_SIZE, this.y * SIZE + QUARTER_SIZE);
         vertex(this.x * SIZE + QUARTER_SIZE, this.y * SIZE + QUARTER_SIZE * 3);
@@ -127,6 +133,7 @@ class Tile {
             //
             pacman.cherryEaten = true;
             window.setTimeout(() => {
+              pacman.cherryEaten = false;
               console.log("Cherry Eaten: ", pacman.cherryEaten);
             }, 1000);
             break;
