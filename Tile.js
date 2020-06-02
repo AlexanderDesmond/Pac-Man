@@ -18,6 +18,7 @@ class Tile {
     this.speed = 0.15;
 
     this.behaviour = behaviour;
+    this.cherryEaten = false;
   }
 
   draw() {
@@ -123,6 +124,11 @@ class Tile {
           case "CHERRY":
             score += 10;
             destinationTile.exists = false;
+            //
+            pacman.cherryEaten = true;
+            window.setTimeout(() => {
+              console.log("Cherry Eaten: ", pacman.cherryEaten);
+            }, 1000);
             break;
 
           case "GHOST":
