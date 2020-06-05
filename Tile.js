@@ -137,7 +137,9 @@ class Tile {
 
           case "GHOST":
             // If the Ghosts are not scared but Pac-Man tries to eat a Ghost - Game Over
-            if (!pacman.cherryEaten) endGame(false);
+            if (!pacman.cherryEaten) {
+              endGame(false);
+            }
             break;
         }
       }
@@ -149,10 +151,14 @@ class Tile {
     } else if (this.type === "GHOST") {
       /* Ghost AI */
 
-      // If a Ghost is not scared and catches Pac-Man the game is lost.
+      // If a Ghost is not scared and catches Pac-Man the game is lost. If Ghost is scared, it respawns in its prison.
       let distance = dist(pacman.x, pacman.y, this.x, this.y);
-      if (distance < 0.3 && !pacman.cherryEaten) {
-        endGame(false);
+      if (distance < 0.3) {
+        if (!pacman.cherryEaten) {
+          endGame(false);
+        } else {
+          this.move(9, 9, false);
+        }
       }
 
       // If already moving, it cannot move again until next update.

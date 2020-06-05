@@ -34,6 +34,14 @@ function setup() {
   createCanvas(500, 540);
 
   field = generateField();
+
+  //
+  console.log(FIELD_MAP);
+  console.log(field);
+  for (let i = 0; i < ghosts.length; i++) {
+    console.log(ghosts[i].x, ghosts[i].y);
+  }
+  //
 }
 
 function draw() {
