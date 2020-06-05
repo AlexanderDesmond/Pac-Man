@@ -19,6 +19,7 @@ class Tile {
 
     this.behaviour = behaviour;
     this.cherryEaten = false;
+    this.imprisoned = false;
   }
 
   draw() {
