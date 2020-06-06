@@ -5,6 +5,9 @@ const HALF_SIZE = SIZE / 2;
 const THIRD_SIZE = SIZE / 3;
 const QUARTER_SIZE = SIZE / 4;
 
+// Timeout interval
+let timeout = 10000;
+
 // Class for Tile
 class Tile {
   constructor(x, y, type, behaviour) {
@@ -133,7 +136,9 @@ class Tile {
             score += 10;
             destinationTile.exists = false;
             pacman.cherryEaten = true;
-            window.setTimeout(() => (pacman.cherryEaten = false), 10000);
+
+            if (pacman.cherryEaten) timeout += timeout;
+            window.setTimeout(() => (pacman.cherryEaten = false), timeout);
             break;
 
           case "GHOST":
@@ -159,6 +164,10 @@ class Tile {
           endGame(false);
         } else {
           this.move(9, 9, false);
+
+          /*
+          this.window.setTimeout(() => (), timeout);
+          */
         }
       }
 
