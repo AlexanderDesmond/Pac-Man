@@ -163,7 +163,15 @@ class Tile {
         if (!pacman.cherryEaten) {
           endGame(false);
         } else {
-          this.move(9, 9, false);
+          if (this.behaviour === 0) {
+            this.move(10, 9, false);
+            this.imprisoned = true;
+            window.setTimeout(() => (this.imprisoned = false), 5000);
+          } else {
+            this.move(10, 10, false);
+            this.imprisoned = true;
+            window.setTimeout(() => (this.imprisoned = false), 5000);
+          }
 
           /*
           this.window.setTimeout(() => (), timeout);
@@ -174,43 +182,47 @@ class Tile {
       // If already moving, it cannot move again until next update.
       if (this.moving) return false;
 
-      // List of possible moves.
-      // UP, DOWN. LEFT, RIGHT
-      let possibleMoves = [
-        getTile(this.x, this.y - 1),
-        getTile(this.x, this.y + 1),
-        getTile(this.x - 1, this.y),
-        getTile(this.x + 1, this.y),
-      ];
+      // Ghost cannot move for a time while imprisoned.
+      if (!this.imprisoned) {
+        // List of possible moves.
+        // UP, DOWN. LEFT, RIGHT
+        let possibleMoves = [
+          getTile(this.x, this.y - 1),
+          getTile(this.x, this.y + 1),
+          getTile(this.x - 1, this.y),
+          getTile(this.x + 1, this.y),
+        ];
 
-      // Sort possibleMoves in order of most optimal moves (moves closest to Pac-Man).
-      possibleMoves.sort((a, b) => {
-        let aDist = dist(a.x, a.y, pacman.x, pacman.y);
-        let bDist = dist(b.x, b.y, pacman.x, pacman.y);
+        // Sort possibleMoves in order of most optimal moves (moves closest to Pac-Man).
+        possibleMoves.sort((a, b) => {
+          let aDist = dist(a.x, a.y, pacman.x, pacman.y);
+          let bDist = dist(b.x, b.y, pacman.x, pacman.y);
 
-        return aDist - bDist;
-      });
+          return aDist - bDist;
+        });
 
-      // Make move
-      if (!pacman.cherryEaten) {
-        if (this.behaviour === 0) {
-          // If Ghost is 'aggressive', move towards Pac-Man.
-          for (let i = 0; i < possibleMoves.length; i++) {
-            // Attempt to move towards Pac-Man.
-            if (this.move(possibleMoves[i].x, possibleMoves[i].y, false)) break;
+        // Make move
+        if (!pacman.cherryEaten) {
+          if (this.behaviour === 0) {
+            // If Ghost is 'aggressive', move towards Pac-Man.
+            for (let i = 0; i < possibleMoves.length; i++) {
+              // Attempt to move towards Pac-Man.
+              if (this.move(possibleMoves[i].x, possibleMoves[i].y, false))
+                break;
+            }
+          } else {
+            // Otherwise, take any possible move.
+            let i = Math.floor(random(4));
+            this.move(possibleMoves[i].x, possibleMoves[i].y, false);
           }
         } else {
-          // Otherwise, take any possible move.
-          let i = Math.floor(random(4));
-          this.move(possibleMoves[i].x, possibleMoves[i].y, false);
-        }
-      } else {
-        // If Pac-Man recently ate a cherry, the Ghosts are scared and run away.
-        let movesReversed = possibleMoves.slice().reverse();
+          // If Pac-Man recently ate a cherry, the Ghosts are scared and run away.
+          let movesReversed = possibleMoves.slice().reverse();
 
-        for (let i = 0; i < movesReversed.length; i++) {
-          // Attempt to move away Pac-Man.
-          if (this.move(movesReversed[i].x, movesReversed[i].y, false)) break;
+          for (let i = 0; i < movesReversed.length; i++) {
+            // Attempt to move away Pac-Man.
+            if (this.move(movesReversed[i].x, movesReversed[i].y, false)) break;
+          }
         }
       }
     }
